@@ -1,0 +1,11 @@
+prefix=${pcfiledir}/../..
+
+exec_prefix=${prefix}/bin
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: LEMON
+Description: Library for Efficient Modeling and Optimization in Networks
+Version: 
+Libs: -L"${libdir}" -lemon     
+Cflags: -I"${includedir}"

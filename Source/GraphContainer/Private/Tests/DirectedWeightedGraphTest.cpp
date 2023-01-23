@@ -1,4 +1,5 @@
 #include "Misc/AutomationTest.h"
+#include <lemon/list_graph.h>
 #include "Tests/AutomationEditorCommon.h"
 
 template<typename BundledVertex, typename BundledEdge>
@@ -24,9 +25,9 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 
 	// Graph is created empty
 	{
-		TDirectedWeightedGraph<FTestVertex, FTestEdge> graph{};
+		lemon::ListDigraph h{};
 
-		TestTrue(TEXT("Graph is created empty"), graph.IsEmpty());
+		TestTrue(TEXT("Graph is created empty"), lemon::countNodes(h) == 0);
 	}
 
 	return true;

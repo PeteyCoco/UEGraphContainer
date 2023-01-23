@@ -26,6 +26,7 @@ public class GraphContainer : ModuleRules
 			new string[]
 			{
 				"Core",
+				"Lemon"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

@@ -1,0 +1,8 @@
+Package: liblemon
+Version: 2019-06-13
+Port-Version: 3
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 545d6de6ce333c8bb9622ca17aea3564b48488287cd7bddf78d9323e571d6c1f
+Description: Library for Efficient Modeling and Optimization in Networks
+Type: Port
