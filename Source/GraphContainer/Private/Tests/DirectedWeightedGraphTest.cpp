@@ -30,7 +30,8 @@ public:
 	// Adds a node to the graph
 	void AddNode(const NodeClass& Node)
 	{
-		graph.addNode();
+		auto NodeHandle = graph.addNode();
+		NodeMap.Add(Node.ID, NodeHandle);
 	}
 
 	// Adds an edge to the graph from the origin node to the destination node
@@ -41,13 +42,16 @@ public:
 		graph.addArc(o, d);
 	}
 	
+	// Check if the graph contains the given node
 	bool HasNode(const NodeClass& Node) const
 	{
-		return true;
+		return NodeMap.Contains(Node.ID);
 	}
 
 private:
 	lemon::ListDigraph graph{};
+
+	TMap<int, lemon::ListDigraph::Node> NodeMap{};
 };
 
 bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
@@ -81,7 +85,7 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		TestEqual(TEXT("Graph must contain two nodes"), graph.NumNodes(), 2);
 	}
 
-	// Get the graph's internal ID for the given node
+	// Graph must contain the node added to the graph
 	{
 		DirectedWeightedGraph<TestNode, TestEdge> graph;
 		TestNode N1{};
@@ -90,6 +94,19 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		graph.AddNode(N1);
 
 		TestTrue(TEXT("Graph must contain the node added to the graph"), graph.HasNode(N1));
+	}
+
+	// Graph must not contain an unadded node
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{};
+		TestNode N2{};
+		N1.ID = 0;
+		N2.ID = 100;
+
+		graph.AddNode(N1);
+
+		TestFalse(TEXT("Graph must not contain node not present in graph"), graph.HasNode(N2));
 	}
 
 	return true;
