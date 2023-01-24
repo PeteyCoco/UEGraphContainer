@@ -13,7 +13,9 @@ public:
 
 class TestEdge
 {
-
+public:
+	// Unique edge identifier
+	int ID{};
 };
 
 template <typename NodeClass, typename EdgeClass>
@@ -41,24 +43,35 @@ public:
 		NodeMap.Add(Node.ID, NodeHandle);
 	}
 
-	// Adds an edge to the graph from the origin node to the destination node
-	void AddEdge(const EdgeClass& Edge, const NodeClass& Origin, const NodeClass& Destination)
-	{
-		auto o = graph.addNode();
-		auto d = graph.addNode();
-		graph.addArc(o, d);
-	}
-	
 	// Check if the graph contains the given node
 	bool HasNode(const NodeClass& Node) const
 	{
 		return NodeMap.Contains(Node.ID);
 	}
 
+	// Adds an edge to the graph from the origin node to the destination node
+	void AddEdge(const EdgeClass& Edge, const NodeClass& Origin, const NodeClass& Destination)
+	{
+		auto o = graph.addNode();
+		auto d = graph.addNode();
+		auto EdgeHandle = graph.addArc(o, d);
+		EdgeMap.Add(Edge.ID, EdgeHandle);
+	}
+
+	// Check if the graph contains the given edge
+	bool HasEdge(const EdgeClass& Edge) const
+	{
+		return EdgeMap.Contains(Edge.ID);
+	}
+
+
 private:
 	lemon::ListDigraph graph{};
 
 	TMap<FNodeRef, lemon::ListDigraph::Node> NodeMap{};
+
+	TMap<FNodeRef, lemon::ListDigraph::Arc> EdgeMap{};
+
 };
 
 bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
@@ -124,6 +137,31 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		graph.AddNode(N1);
 
 		TestEqual(TEXT("Graph must contain one node"), graph.NumNodes(), 1);
+	}
+
+	// Graph must contain the edge added to the graph
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{ 0 };
+		TestNode N2{ 1 };
+		TestEdge E{ 0 };
+
+		graph.AddEdge(E, N1, N2);
+
+		TestTrue(TEXT("Graph must contain the edge added to the graph"), graph.HasEdge(E));
+	}
+
+	// Graph does not contain edge not in graph
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{ 0 };
+		TestNode N2{ 1 };
+		TestEdge E1{ 0 };
+		TestEdge E2{ 1 };
+
+		graph.AddEdge(E1, N1, N2);
+
+		TestFalse(TEXT("Graph must not contain an edge not in graph"), graph.HasEdge(E2));
 	}
 
 	return true;
