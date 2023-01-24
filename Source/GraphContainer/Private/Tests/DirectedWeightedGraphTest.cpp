@@ -30,7 +30,7 @@ public:
 	int NumNodes() const { return lemon::countNodes(graph); }
 
 	// Adds a node to the graph
-	void AddNode(TestNode& Node)
+	void AddNode(NodeClass& Node)
 	{
 		auto NodeHandle = graph.addNode();
 	}
