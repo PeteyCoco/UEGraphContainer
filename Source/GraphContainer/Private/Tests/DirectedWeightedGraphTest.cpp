@@ -31,6 +31,12 @@ public:
 	// Adds a node to the graph
 	void AddNode(const NodeClass& Node)
 	{
+		if (HasNode(Node))
+		{
+			UE_LOG(LogTemp, Error, TEXT("Cannot add the same node twice. No node added to graph."));
+			return;
+		}
+
 		auto NodeHandle = graph.addNode();
 		NodeMap.Add(Node.ID, NodeHandle);
 	}
@@ -100,14 +106,24 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 	// Graph must not contain an unadded node
 	{
 		DirectedWeightedGraph<TestNode, TestEdge> graph;
-		TestNode N1{};
-		TestNode N2{};
-		N1.ID = 0;
-		N2.ID = 100;
+		TestNode N1{0};
+		TestNode N2{100};
 
 		graph.AddNode(N1);
 
 		TestFalse(TEXT("Graph must not contain node not present in graph"), graph.HasNode(N2));
+	}
+
+	// Cannot add the same node twice
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{ 100 };
+
+		graph.AddNode(N1);
+		AddExpectedError(TEXT("Cannot add the same node twice. No node added to graph."), EAutomationExpectedErrorFlags::Exact, 1);
+		graph.AddNode(N1);
+
+		TestEqual(TEXT("Graph must contain one node"), graph.NumNodes(), 1);
 	}
 
 	return true;
