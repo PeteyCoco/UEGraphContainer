@@ -7,11 +7,9 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDirectedWeightedGraph, "Graph Container.Direct
 class TestNode
 {
 public:
-	// Set the ID of the Node
-	void SetID(int value) { ID = value; }
 
 private:
-	int ID{};
+
 };
 
 class TestEdge
@@ -24,6 +22,7 @@ class DirectedWeightedGraph
 {
 public:
 
+
 	// Checks whether the graph contains no nodes
 	bool IsEmpty() const { return true; }
 
@@ -34,7 +33,6 @@ public:
 	void AddNode(TestNode& Node)
 	{
 		auto NodeHandle = graph.addNode();
-		Node.SetID(graph.id(NodeHandle));
 	}
 
 private:
