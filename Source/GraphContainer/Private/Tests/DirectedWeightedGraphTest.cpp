@@ -4,10 +4,10 @@
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDirectedWeightedGraph, "Graph Container.Directed Weighted Graph", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
-class TestVertex
+class TestNode
 {
 public:
-	// Set the ID of the Vertex
+	// Set the ID of the Node
 	void SetID(int value) { ID = value; }
 
 private:
@@ -19,7 +19,7 @@ class TestEdge
 
 };
 
-template <typename VertexClass, typename EdgeClass>
+template <typename NodeClass, typename EdgeClass>
 class DirectedWeightedGraph
 {
 public:
@@ -27,14 +27,14 @@ public:
 	// Checks whether the graph contains no nodes
 	bool IsEmpty() const { return true; }
 
-	// Counts the number of vertices in the graph
-	int NumVertices() const { return lemon::countNodes(graph); }
+	// Counts the number of nodes in the graph
+	int NumNodes() const { return lemon::countNodes(graph); }
 
 	// Adds a node to the graph
-	void AddVertex(TestVertex& Vertex)
+	void AddNode(TestNode& Node)
 	{
-		auto Node = graph.addNode();
-		Vertex.SetID(graph.id(Node));
+		auto NodeHandle = graph.addNode();
+		Node.SetID(graph.id(NodeHandle));
 	}
 
 private:
@@ -45,19 +45,19 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 
 	// Graph is created empty
 	{
-		DirectedWeightedGraph<TestVertex, TestEdge> graph;
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
 
 		TestTrue(TEXT("Graph is created empty"), graph.IsEmpty());
 	}
 
 	// Adding node increases the size of the graph to one
 	{
-		DirectedWeightedGraph<TestVertex, TestEdge> graph;
-		TestVertex V{};
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode V{};
 
-		graph.AddVertex(V);
+		graph.AddNode(V);
 
-		TestEqual(TEXT("Graph must contain one node"), graph.NumVertices(), 1);
+		TestEqual(TEXT("Graph must contain one node"), graph.NumNodes(), 1);
 	}
 
 	return true;
