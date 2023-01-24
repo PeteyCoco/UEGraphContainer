@@ -7,9 +7,8 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDirectedWeightedGraph, "Graph Container.Direct
 class TestNode
 {
 public:
-
-private:
-
+	// Unique node identifier
+	int ID{};
 };
 
 class TestEdge
@@ -21,7 +20,6 @@ template <typename NodeClass, typename EdgeClass>
 class DirectedWeightedGraph
 {
 public:
-
 
 	// Checks whether the graph contains no nodes
 	bool IsEmpty() const { return true; }
@@ -42,6 +40,11 @@ public:
 		auto d = graph.addNode();
 		graph.addArc(o, d);
 	}
+	
+	bool HasNode(const NodeClass& Node) const
+	{
+		return true;
+	}
 
 private:
 	lemon::ListDigraph graph{};
@@ -59,9 +62,9 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 	// Adding node increases the size of the graph to one
 	{
 		DirectedWeightedGraph<TestNode, TestEdge> graph;
-		TestNode V{};
+		TestNode N{};
 
-		graph.AddNode(V);
+		graph.AddNode(N);
 
 		TestEqual(TEXT("Graph must contain one node"), graph.NumNodes(), 1);
 	}
@@ -76,6 +79,17 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		graph.AddEdge(E, N1, N2);
 
 		TestEqual(TEXT("Graph must contain two nodes"), graph.NumNodes(), 2);
+	}
+
+	// Get the graph's internal ID for the given node
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{};
+		N1.ID = 0;
+
+		graph.AddNode(N1);
+
+		TestTrue(TEXT("Graph must contain the node added to the graph"), graph.HasNode(N1));
 	}
 
 	return true;
