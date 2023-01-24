@@ -20,6 +20,7 @@ template <typename NodeClass, typename EdgeClass>
 class DirectedWeightedGraph
 {
 public:
+	typedef int FNodeRef;
 
 	// Checks whether the graph contains no nodes
 	bool IsEmpty() const { return true; }
@@ -51,7 +52,7 @@ public:
 private:
 	lemon::ListDigraph graph{};
 
-	TMap<int, lemon::ListDigraph::Node> NodeMap{};
+	TMap<FNodeRef, lemon::ListDigraph::Node> NodeMap{};
 };
 
 bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
