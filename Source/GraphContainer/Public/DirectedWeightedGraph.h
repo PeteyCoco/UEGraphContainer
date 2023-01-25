@@ -19,6 +19,9 @@ public:
 	// Counts the number of nodes in the graph
 	inline int NumNodes() const { return lemon::countNodes(graph); }
 
+	// Counts the number of edges in the graph
+	inline int NumEdges() const { return lemon::countArcs(graph); }
+
 	// Adds a node to the graph
 	void AddNode(const NodeClass& Node);
 

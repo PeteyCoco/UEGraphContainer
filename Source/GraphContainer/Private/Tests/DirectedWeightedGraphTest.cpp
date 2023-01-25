@@ -27,6 +27,7 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		TestTrue(TEXT("Graph is created empty"), graph.IsEmpty());
 	}
 
+
 	// Adding node increases the size of the graph to one
 	{
 		DirectedWeightedGraph<TestNode, TestEdge> graph;
@@ -47,6 +48,7 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		graph.AddEdge(E, N1, N2);
 
 		TestEqual(TEXT("Graph must contain two nodes"), graph.NumNodes(), 2);
+		TestEqual(TEXT("Graph must contain one edge"), graph.NumEdges(), 1);
 	}
 
 	// Graph must contain the node added to the graph
