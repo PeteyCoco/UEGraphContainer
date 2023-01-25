@@ -33,10 +33,7 @@ public:
 	}
 
 	// Check if the graph contains the given node
-	bool HasNode(const NodeClass& Node) const
-	{
-		return NodeMap.Contains(Node.ID);
-	}
+	bool HasNode(const NodeClass& Node) const;
 
 	// Adds an edge to the graph from the origin node to the destination node
 	void AddEdge(const EdgeClass& Edge, const NodeClass& Origin, const NodeClass& Destination)
@@ -62,3 +59,5 @@ private:
 	TMap<FNodeRef, lemon::ListDigraph::Arc> EdgeMap{};
 
 };
+
+
