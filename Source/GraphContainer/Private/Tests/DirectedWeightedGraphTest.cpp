@@ -149,5 +149,21 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		TestFalse(TEXT("IsValidRef() is false when node is not in graph"), graph.IsValidRef(2));
 	}
 
+	// Count the in, out, and incident edges of a node
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{ 1 };
+		TestNode N2{ 2 };
+		TestNode N3{ 3 };		
+		TestNode N4{ 4 };
+
+		graph.AddEdge(TestEdge{ 1 }, N1, N2);
+		graph.AddEdge(TestEdge{ 2 }, N1, N3);
+		graph.AddEdge(TestEdge{ 3 }, N1, N1);
+		graph.AddEdge(TestEdge{ 4 }, N4, N1);
+
+		TestEqual(TEXT("Count the in-degree of N1"), graph.NumInEdges(N1), 2);
+	}
+
 	return true;
 }

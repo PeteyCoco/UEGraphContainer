@@ -50,6 +50,9 @@ public:
 	// Check if the graph contains the given edge
 	bool HasEdge(const EdgeClass& Edge) const;
 
+	// Counts the number of incoming edges on a node
+	inline int NumInEdges(const NodeClass& Node) const { return lemon::countInArcs(graph, ToLemonNode(Node)); }
+
 	/////////////////////////
 	// FGraphAStar interface
 	////////////////////////
