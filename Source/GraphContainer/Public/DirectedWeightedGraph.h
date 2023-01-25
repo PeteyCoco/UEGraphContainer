@@ -15,11 +15,11 @@ public:
 	typedef int FNodeRef;
 	typedef int FEdgeRef;
 
+private:
 	// Aliases for Lemon's internal types
 	typedef lemon::ListDigraph::Node LemonNode;
 	typedef lemon::ListDigraph::Arc LemonEdge;
 
-private:
 	inline LemonNode ToLemonNode(const NodeClass& Node) const { return NodeMap[Node.ID]; }
 
 	inline LemonNode LemonAddNode() { return graph.addNode(); }
