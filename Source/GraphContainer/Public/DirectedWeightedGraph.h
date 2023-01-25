@@ -14,6 +14,8 @@ public:
 	typedef int FNodeRef;
 
 	typedef lemon::ListDigraph::Node LemonNode;
+	typedef lemon::ListDigraph::Arc LemonEdge;
+
 
 private:
 	inline LemonNode ToLemonNode(const NodeClass& Node) const { return NodeMap[Node.ID]; }
@@ -52,7 +54,7 @@ private:
 
 	TMap<FNodeRef, LemonNode> NodeMap{};
 
-	TMap<FNodeRef, lemon::ListDigraph::Arc> EdgeMap{};
+	TMap<FNodeRef, LemonEdge> EdgeMap{};
 
 };
 
