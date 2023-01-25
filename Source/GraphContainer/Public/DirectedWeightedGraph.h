@@ -4,19 +4,20 @@
 /*
 *	A container for directed weighted graphs
 * 
-*	NodeClass and EdgeClass must both have a public member variable 'ID' that uniquely
+*	NodeClass and EdgeClass must both have a public integer member variable 'ID' that uniquely
 *	identifies the nodes and edges in the graph.
 */
 template <typename NodeClass, typename EdgeClass>
 class DirectedWeightedGraph
 {
 public:
+	// Aliases for the node and edge ID integer variable
 	typedef int FNodeRef;
 	typedef int FEdgeRef;
 
+	// Aliases for Lemon's internal types
 	typedef lemon::ListDigraph::Node LemonNode;
 	typedef lemon::ListDigraph::Arc LemonEdge;
-
 
 private:
 	inline LemonNode ToLemonNode(const NodeClass& Node) const { return NodeMap[Node.ID]; }
@@ -54,7 +55,6 @@ private:
 	lemon::ListDigraph graph{};
 
 	TMap<FNodeRef, LemonNode> NodeMap{};
-
 	TMap<FEdgeRef, LemonEdge> EdgeMap{};
 
 };
