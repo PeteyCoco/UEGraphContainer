@@ -109,5 +109,19 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		TestFalse(TEXT("Graph must not contain an edge not in graph"), graph.HasEdge(E2));
 	}
 
+	// Cannot add the same node twice
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{ 1 };
+		TestNode N2{ 2 };
+		TestNode N3{ 3 };
+		TestEdge E{ 1 };
+
+		graph.AddEdge(E, N1, N2);
+		graph.AddEdge(E, N2, N3);
+
+		TestEqual(TEXT("Adding edge with same ID twice does nothing"), graph.NumEdges(), 1);
+	}
+
 	return true;
 }

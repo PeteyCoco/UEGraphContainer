@@ -21,6 +21,10 @@ inline bool DirectedWeightedGraph<NodeClass, EdgeClass>::HasNode(const NodeClass
 template<typename NodeClass, typename EdgeClass>
 void DirectedWeightedGraph<NodeClass, EdgeClass>::AddEdge(const EdgeClass& Edge, const NodeClass& Origin, const NodeClass& Destination)
 {
+	if (HasEdge(Edge))
+	{
+		return;
+	}
 	auto o = graph.addNode();
 	auto d = graph.addNode();
 	auto EdgeHandle = graph.addArc(o, d);
