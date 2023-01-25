@@ -27,8 +27,7 @@ void DirectedWeightedGraph<NodeClass, EdgeClass>::AddEdge(const EdgeClass& Edge,
 	AddNode(Origin);
 	AddNode(Destination);
 
-	auto EdgeHandle = LemonAddEdge(ToLemonNode(Origin), ToLemonNode(Destination));
-	EdgeMap.Add(Edge.ID, EdgeHandle);
+	EdgeMap.Add(Edge.ID, LemonAddEdge(ToLemonNode(Origin), ToLemonNode(Destination)));
 }
 
 template<typename NodeClass, typename EdgeClass>
