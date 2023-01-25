@@ -16,7 +16,7 @@ public:
 	typedef lemon::ListDigraph::Node LemonNode;
 
 private:
-	inline lemon::ListDigraph::Node ToLemonNode(const NodeClass& Node) const { return NodeMap[Node.ID]; }
+	inline LemonNode ToLemonNode(const NodeClass& Node) const { return NodeMap[Node.ID]; }
 
 public:
 	// Checks whether the graph contains no nodes
@@ -50,7 +50,7 @@ public:
 private:
 	lemon::ListDigraph graph{};
 
-	TMap<FNodeRef, lemon::ListDigraph::Node> NodeMap{};
+	TMap<FNodeRef, LemonNode> NodeMap{};
 
 	TMap<FNodeRef, lemon::ListDigraph::Arc> EdgeMap{};
 
