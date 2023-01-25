@@ -24,6 +24,10 @@ private:
 
 	inline LemonNode LemonAddNode() { return graph.addNode(); }
 
+	inline LemonEdge LemonAddEdge(const LemonNode& Origin, const LemonNode& Destination) { 
+		return graph.addArc(Origin, Destination); 
+	}
+
 public:
 	// Checks whether the graph contains no nodes
 	inline bool IsEmpty() const { return true; }
