@@ -138,5 +138,16 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		TestEqual(TEXT("Adding two coincident edges yields 3 nodes in graph"), graph.NumNodes(), 3);
 	}
 
+	// FGraphAStar interface tests
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{ 1 };
+
+		graph.AddNode(N1);
+
+		TestTrue(TEXT("IsValidRef() is true when node is in graph"), graph.IsValidRef(1));
+		TestFalse(TEXT("IsValidRef() is false when node is not in graph"), graph.IsValidRef(2));
+	}
+
 	return true;
 }

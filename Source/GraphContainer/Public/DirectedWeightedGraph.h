@@ -4,7 +4,7 @@
 /*
 *	A container for directed weighted graphs
 * 
-*	NodeClass and EdgeClass must both have a public member int ID that uniquely
+*	NodeClass and EdgeClass must both have a public member variable 'ID' that uniquely
 *	identifies the nodes and edges in the graph.
 */
 template <typename NodeClass, typename EdgeClass>
@@ -33,6 +33,13 @@ public:
 
 	// Check if the graph contains the given edge
 	bool HasEdge(const EdgeClass& Edge) const;
+
+	/////////////////////////
+	// FGraphAStar interface
+	////////////////////////
+	
+	// Returns true if a node with the given reference is in the graph
+	bool IsValidRef(FNodeRef NodeRef) const;
 
 private:
 	lemon::ListDigraph graph{};

@@ -41,4 +41,10 @@ bool DirectedWeightedGraph<NodeClass, EdgeClass>::HasEdge(const EdgeClass& Edge)
 	return EdgeMap.Contains(Edge.ID);
 }
 
+template<typename NodeClass, typename EdgeClass>
+bool DirectedWeightedGraph<NodeClass, EdgeClass>::IsValidRef(FNodeRef NodeRef) const
+{
+	return NodeMap.Contains(NodeRef);
+}
+
 
