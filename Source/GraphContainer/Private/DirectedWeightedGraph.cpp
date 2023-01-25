@@ -7,9 +7,7 @@ void DirectedWeightedGraph<NodeClass, EdgeClass>::AddNode(const NodeClass& Node)
 	{
 		return;
 	}
-
-	auto NodeHandle = graph.addNode();
-	NodeMap.Add(Node.ID, NodeHandle);
+	NodeMap.Add(Node.ID, LemonAddNode());
 }
 
 template<typename NodeClass, typename EdgeClass>

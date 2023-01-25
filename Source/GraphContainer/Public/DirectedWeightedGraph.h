@@ -22,6 +22,8 @@ public:
 private:
 	inline LemonNode ToLemonNode(const NodeClass& Node) const { return NodeMap[Node.ID]; }
 
+	inline LemonNode LemonAddNode() { return graph.addNode(); }
+
 public:
 	// Checks whether the graph contains no nodes
 	inline bool IsEmpty() const { return true; }
