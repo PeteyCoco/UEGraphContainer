@@ -41,8 +41,8 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 	// Adding an edge increases the size of the graph to two
 	{
 		DirectedWeightedGraph<TestNode, TestEdge> graph;
-		TestNode N1{};
-		TestNode N2{};
+		TestNode N1{1};
+		TestNode N2{2};
 		TestEdge E{};
 
 		graph.AddEdge(E, N1, N2);
@@ -121,6 +121,21 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		graph.AddEdge(E, N2, N3);
 
 		TestEqual(TEXT("Adding edge with same ID twice does nothing"), graph.NumEdges(), 1);
+	}
+
+	// Adding two coincident edges yields a graph with 3 nodes and two edges
+	{
+		DirectedWeightedGraph<TestNode, TestEdge> graph;
+		TestNode N1{ 1 };
+		TestNode N2{ 2 };
+		TestNode N3{ 3 };
+		TestEdge E1{ 1 };
+		TestEdge E2{ 2 };
+
+		graph.AddEdge(E1, N1, N2);
+		graph.AddEdge(E2, N2, N3);
+
+		TestEqual(TEXT("Adding two coincident edges yields 3 nodes in graph"), graph.NumNodes(), 3);
 	}
 
 	return true;

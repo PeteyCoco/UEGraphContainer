@@ -25,8 +25,12 @@ void DirectedWeightedGraph<NodeClass, EdgeClass>::AddEdge(const EdgeClass& Edge,
 	{
 		return;
 	}
-	auto o = graph.addNode();
-	auto d = graph.addNode();
+
+	AddNode(Origin);
+	AddNode(Destination);
+
+	auto o = NodeMap[Origin.ID];
+	auto d = NodeMap[Destination.ID];
 	auto EdgeHandle = graph.addArc(o, d);
 	EdgeMap.Add(Edge.ID, EdgeHandle);
 }
