@@ -12,6 +12,7 @@ class DirectedWeightedGraph
 {
 public:
 	typedef int FNodeRef;
+	typedef int FEdgeRef;
 
 	typedef lemon::ListDigraph::Node LemonNode;
 	typedef lemon::ListDigraph::Arc LemonEdge;
@@ -54,7 +55,7 @@ private:
 
 	TMap<FNodeRef, LemonNode> NodeMap{};
 
-	TMap<FNodeRef, LemonEdge> EdgeMap{};
+	TMap<FEdgeRef, LemonEdge> EdgeMap{};
 
 };
 
