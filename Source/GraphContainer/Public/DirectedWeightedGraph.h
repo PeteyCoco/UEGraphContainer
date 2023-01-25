@@ -13,6 +13,12 @@ class DirectedWeightedGraph
 public:
 	typedef int FNodeRef;
 
+	typedef lemon::ListDigraph::Node LemonNode;
+
+private:
+	inline lemon::ListDigraph::Node ToLemonNode(const NodeClass& Node) const { return NodeMap[Node.ID]; }
+
+public:
 	// Checks whether the graph contains no nodes
 	inline bool IsEmpty() const { return true; }
 
