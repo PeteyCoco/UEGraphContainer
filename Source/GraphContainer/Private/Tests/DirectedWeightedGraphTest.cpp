@@ -79,10 +79,9 @@ bool FDirectedWeightedGraph::RunTest(FString const& Parameters) {
 		TestNode N1{ 100 };
 
 		graph.AddNode(N1);
-		AddExpectedError(TEXT("Cannot add the same node twice. No node added to graph."), EAutomationExpectedErrorFlags::Exact, 1);
 		graph.AddNode(N1);
 
-		TestEqual(TEXT("Graph must contain one node"), graph.NumNodes(), 1);
+		TestEqual(TEXT("Adding node with same ID twice does nothing"), graph.NumNodes(), 1);
 	}
 
 	// Graph must contain the edge added to the graph

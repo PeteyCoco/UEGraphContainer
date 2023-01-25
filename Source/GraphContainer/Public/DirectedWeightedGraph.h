@@ -31,7 +31,6 @@ public:
 	// Adds an edge to the graph from the origin node to the destination node
 	void AddEdge(const EdgeClass& Edge, const NodeClass& Origin, const NodeClass& Destination);
 
-
 	// Check if the graph contains the given edge
 	bool HasEdge(const EdgeClass& Edge) const;
 

@@ -5,7 +5,6 @@ void DirectedWeightedGraph<NodeClass, EdgeClass>::AddNode(const NodeClass& Node)
 {
 	if (HasNode(Node))
 	{
-		UE_LOG(LogTemp, Error, TEXT("Cannot add the same node twice. No node added to graph."));
 		return;
 	}
 
