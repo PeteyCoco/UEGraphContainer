@@ -1,6 +1,12 @@
 #pragma once
 #include <lemon/list_graph.h>
 
+/*
+*	A container for directed weighted graphs
+* 
+*	NodeClass and EdgeClass must both have a public member int ID that uniquely
+*	identifies the nodes and edges in the graph.
+*/
 template <typename NodeClass, typename EdgeClass>
 class DirectedWeightedGraph
 {
